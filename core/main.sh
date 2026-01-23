@@ -330,10 +330,11 @@ function processes_sni_config() {
     case ${choose} in
     1) exec_handler '--change-domain' 'domain' ;; # 选择 1：更改域名
     2) exec_handler '--change-domain' 'cdn' ;;    # 选择 2：更改 CDN
-    3) exec_handler '--nginx-update' ;;           # 选择 3：更新 Nginx 配置
-    4) exec_handler '--nginx-cron' ;;             # 选择 4：配置 Nginx Cron 任务
-    5) processes_web_config ;;                    # 选择 5：进入 Web 配置流程
-    6) exec_handler '--v3-reset' ;;               # 选择 6：重置 V3 配置
+    3) exec_handler '--renew-certificate' ;;      # 选择 3：强制证书续签
+    4) exec_handler '--nginx-update' ;;           # 选择 4：更新 Nginx 配置
+    5) exec_handler '--nginx-cron' ;;             # 选择 5：配置 Nginx Cron 任务
+    6) processes_web_config ;;                    # 选择 6：进入 Web 配置流程
+    7) exec_handler '--v3-reset' ;;               # 选择 7：重置 V3 配置
     *) exit 0 ;;                                  # 其他情况：退出脚本
     esac
 }
@@ -382,8 +383,9 @@ function processes_config() {
     1) processes_xray_config ;;         # 选择 1：进入 Xray 配置流程
     2) processes_routing ;;             # 选择 2：进入路由规则配置流程
     3) processes_sni_config ;;          # 选择 3：进入 SNI 配置流程
-    4) exec_handler '--geodata-cron' ;; # 选择 4：配置 GeoData Cron 任务
-    5) processes_language ;;            # 选择 5：设置语言
+    4) exec_handler '--change-port' ;;  # 选择 4：修改 Xray 端口
+    5) exec_handler '--geodata-cron' ;; # 选择 5：配置 GeoData Cron 任务
+    6) processes_language ;;            # 选择 6：设置语言
     *) exit 0 ;;                        # 其他情况：退出脚本
     esac
 }
