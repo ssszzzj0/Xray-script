@@ -36,7 +36,7 @@ RUN wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
     && tar -xzf nginx-${NGINX_VERSION}.tar.gz
 
 # Download OpenSSL
-RUN wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz \
+RUN wget https://github.com/openssl/openssl/releases/download/openssl-${OPENSSL_VERSION}/openssl-${OPENSSL_VERSION}.tar.gz \
     && tar -xzf openssl-${OPENSSL_VERSION}.tar.gz
 
 # Clone ngx_brotli module
@@ -136,7 +136,7 @@ RUN groupadd -r nginx && useradd -r -g nginx nginx
 # Copy Nginx from builder stage
 COPY --from=nginx-builder /usr/sbin/nginx /usr/sbin/nginx
 COPY --from=nginx-builder /usr/local/nginx /usr/local/nginx
-COPY --from=nginx-builder /usr/lib/nginx /usr/lib/nginx
+COPY --from=nginx-builder /etc/nginx /etc/nginx
 
 # Create required directories
 RUN mkdir -p /var/cache/nginx/client_temp \
